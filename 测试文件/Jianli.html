@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人简历-郭豪</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+        overflow-y: auto;
+      }
+      .resume {
+        width: 80%;
+        max-width: 800px;
+        background-color: #252526;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .header {
+        background-color: #2d2d2d; /* 更深的背景颜色 */
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px; /* 添加圆角 */
+        margin-bottom: 20px; /* 添加底部间距 */
+      }
+      .header .inner-box {
+        background-color: #444444; /* 更浅的背景颜色 */
+        padding: 20px;
+        border-radius: 8px; /* 添加圆角 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .header img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 10px;
+      }
+      .header .info {
+        margin-top: 10px;
+      }
+      .header .info h1 {
+        margin: 0;
+        font-size: 24px;
+        display: inline-block;
+      }
+      .header .info p {
+        margin: 0 0 0 10px;
+        display: inline-block;
+      }
+      .section {
+        padding: 20px;
+      }
+      .section h2 {
+        border-bottom: 2px solid #5e96c489;
+        padding-bottom: 10px;
+        margin-top: 0;
+        color: #5793c4;
+        font-weight: bold;
+      }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        background-color: #383838;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 20px 0;
+      }
+      .gallery img {
+        width: 30%;
+        max-width: 250px;
+        margin: 10px;
+        border-radius: 4px;
+        transition: transform 0.2s;
+        cursor: pointer;
+        position: relative;
+        border: 15px solid #a4abb136; /* 添加边框 */
+        box-sizing: border-box; /* 确保边框包含在宽度内 */
+      }
+      .gallery img:hover {
+        transform: scale(1.1);
+      }
+      .gallery img::after {
+        content: "点击可查看";
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #d4d4d4;
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: none;
+      }
+      .gallery img:hover::after {
+        display: block;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+      }
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close:hover,
+      .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .download {
+        display: none;
+        position: absolute;
+        bottom: 15px;
+        right: 35px;
+        color: #569cd6;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .download.show {
+        display: block;
+      }
+            .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        background-color: #383838;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 20px 0;
+      }
+
+      .circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #d4d4d4;
+        font-size: 16px;
+        margin: 10px;
+        transition: transform 0.2s;
+        cursor: pointer;
+      }
+
+      .circle:hover {
+        transform: scale(1.1);
+      }
+
+      /* 响应式设计 */
+      @media only screen and (max-width: 766px) {
+        .circle {
+          width: 70px;
+          height: 70px;
+          font-size: 14px;
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        .circle {
+          width: 60px;
+          height: 60px;
+          font-size: 12px;
+        }
+      }
+
+
+      /* 响应式设计 */
+      @media only screen and (max-width: 766px) {
+        .header .inner-box {
+          background-color: #444444;
+          padding: 20px;
+          border-radius: 8px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .gallery img {
+          width: 35%;
+          max-width: 200px;
+          margin: 15px;
+          border: 12px solid #a8b1ba3d;
+          box-sizing: border-box;
+        }
+        .section h2 {
+          font-size: 20px;
+        }
+        .header img {
+          width: 80px;
+          height: 80px;
+        }
+        .header .info h1 {
+          font-size: 20px;
+        }
+        .header .info p {
+          font-size: 16px;
+        }
+        .modal-content {
+          width: 90%;
+          max-width: 500px;
+        }
+        .close {
+          font-size: 30px;
+        }
+        .download {
+          font-size: 18px;
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        .header .inner-box {
+          background-color: #444444;
+          padding: 20px;
+          border-radius: 8px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .gallery img {
+          width: 90%;
+          max-width: 300px;
+          margin: 12px;
+          border: 5px solid #c7c1b85c;
+          box-sizing: border-box;
+        }
+        .section h2 {
+          font-size: 18px;
+        }
+        .header img {
+          width: 60px;
+          height: 60px;
+        }
+        .header .info h1 {
+          font-size: 18px;
+        }
+        .header .info p {
+          font-size: 14px;
+        }
+        .modal-content {
+          width: 100%;
+          max-width: 100%;
+        }
+        .close {
+          font-size: 25px;
+        }
+        .download {
+          font-size: 18px;
+        }
+      }
+
+      /* 新增样式 */
+      .info-columns {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+      }
+      .info-column {
+        flex: 1;
+        margin-right: 20px;
+      }
+      .info-column:last-child {
+        margin-right: 0;
+      }
+      .info-columns::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 100%;
+        background-color: #555; /* 浅浅的竖线颜色 */
+        z-index: 2;
+      }
+
+      /* 响应式设计调整 */
+      @media only screen and (max-width: 766px) {
+        .info-columns {
+          flex-direction: column;
+        }
+        .info-columns::before {
+          display: none;
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        .info-columns {
+          flex-direction: column;
+        }
+        .info-columns::before {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="resume">
+      <div class="header">
+        <div class="inner-box">
+          <img src="白底1寸.jpg" alt="郭豪" />
+          <div class="info">
+            <h1>郭豪</h1>
+            <p>书法/美术教师</p>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>基础个人信息</h2>
+        <div class="info-columns">
+          <div class="info-column">
+            <p>毕业院校：曲阜师范大学</p>
+            <p>家住地址：四川省雅安市</p>
+            <p>电话：18123471791</p>
+          </div>
+          <div class="info-column">
+            <p>专业：书法学（本科师范）</p>
+            <p></p>
+            <p>电子邮件：3389149767@qq.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>教育经历</h2>
+        <p>2021.9-2025.9 / 曲阜师范大学 / 书法学专业/ 大学本科
+
+<br><br>主修课程：书法美学，中外美术史，中国画基础，硬笔书写技能，教育学，教育心理学，篆刻学等。
+</p>
+      </div>
+      <div class="section">
+        <h2>工作经验</h2>
+        <p>2021年-至今寒暑假期 | 寒暑假书法班 | 硬笔书法教师<hr>--负责教授学前班至三年级共计九个小型（15-30人）班级学生硬笔书法课程，注重培养学生正确的书写姿势和笔画规范；根据学生年龄特点设计个性化教学方案，趣味教学；定期组织书法作品展示活动，帮助学生在书法学习中取得显著进步</p><br>
+        <p>2024.3~2024.8 | 山东泰安智源小学 | 实习代课<hr> --英语教学（二年级） 担任二年级学期英语课程的教学工作，设计并实施符合学生认知水平的教学计划，注重培养学生的英语基础语法、词汇和口语表达能力。通过趣味教学法和互动活动，激发学生学习英语的兴趣，效果显著。<br><br>--硬笔书法教学（四年级） 同时负责四年级硬笔书法教学，教授学生正确的书写姿势、笔画规范及字体结构。通过个性化指导和定期作业反馈，帮助学生养成良好的书写习惯，学生书法作品在班级展示中获得高度评价。<br><br>--语文代课（四年级） 代课四年级语文课程共计6课时，负责讲解课文内容、辅导学生完成课堂作业，确保学生对教学内容的理解和掌握。</p>
+      </div>
+            <div class="section">
+        <h2>个人技能</h2>
+        <div class="gallery">
+          <div class="circle" style="background-color: #4CAF50;">摄影</div>
+          <div class="circle" style="background-color: #2196F3;">国画</div>
+          <div class="circle" style="background-color: #FF5722;">书法</div>
+          <div class="circle" style="background-color: #9C27B0;">HTML</div>
+          <div class="circle" style="background-color: #009688;">CSS</div>
+          <div class="circle" style="background-color: #af8b4c;">写作</div>
+          <div class="circle" style="background-color: #f321e5;">WPS</div>
+
+          <!-- 可以根据需要添加更多技能 -->
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>书画作品展示</h2>
+        <div class="gallery">
+          <img src="shuhua1.jpg" alt="作品1" onclick="showModal(this.src)" />
+          <img src="shuhua2.jpg" alt="作品2" onclick="showModal(this.src)" />
+          <img src="shuhua3.jpg" alt="作品3" onclick="showModal(this.src)" />
+          <img src="shuhua4.jpg" alt="作品4" onclick="showModal(this.src)" />
+          <img src="shuhua5.jpg" alt="作品5" onclick="showModal(this.src)" />
+          <img src="SH6.jpg" alt="作品6" onclick="showModal(this.src)" />
+          <img src="SH7.jpg" alt="作品7" onclick="showModal(this.src)" />
+          <img src=".jpg" alt="作品8" onclick="showModal(this.src)" />
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img class="modal-content" id="modalImg" />
+      <a class="download" id="downloadLink" href="#" download="作品.jpg"
+        >下载图片</a
+      >
+    </div>
+
+    <script>
+      let allowDownload = true;
+
+      function showModal(src) {
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("modalImg");
+        var downloadLink = document.getElementById("downloadLink");
+
+        modal.style.display = "block";
+        modalImg.src = src;
+        downloadLink.href = src;
+
+        if (!allowDownload) {
+          downloadLink.style.display = "none";
+        } else {
+          downloadLink.style.display = "block";
+        }
+      }
+
+      function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
